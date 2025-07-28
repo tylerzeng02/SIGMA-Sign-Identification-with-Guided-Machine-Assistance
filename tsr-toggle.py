@@ -11,69 +11,70 @@ cap = cv2.VideoCapture(0)
 
 last_spoken = {}
 cooldown = 3
-language = 'en'   
+language = 'en'  # Default to English
 
+# Language-specific full phrases
 translations_all = {
     'en': {
-        "green": "green",
-        "red": "red",
-        "yellow": "yellow",
+        "green": "green light",
+        "red": "red light",
+        "yellow": "yellow light",
         "school-zone": "school zone",
         "pedestrian-crossing": "pedestrian crossing",
         "construction-sign": "construction sign"
     },
     'ko': {
-        "green": "초록색",
-        "red": "빨간색",
-        "yellow": "노란색",
+        "green": "초록 신호",
+        "red": "빨간 신호",
+        "yellow": "노란 신호",
         "school-zone": "학교 구역",
         "pedestrian-crossing": "횡단보도",
         "construction-sign": "공사 표지판"
     },
     'ja': {
-        "green": "みどり",
-        "red": "あか",
-        "yellow": "きいろ",
+        "green": "青信号",
+        "red": "赤信号",
+        "yellow": "黄信号",
         "school-zone": "通学路",
         "pedestrian-crossing": "横断歩道",
         "construction-sign": "工事標識"
     },
     'es': {
-        "green": "verde",
-        "red": "rojo",
-        "yellow": "amarillo",
+        "green": "luz verde",
+        "red": "luz roja",
+        "yellow": "luz amarilla",
         "school-zone": "zona escolar",
         "pedestrian-crossing": "paso de peatones",
         "construction-sign": "señal de construcción"
     },
     'fr': {
-        "green": "vert",
-        "red": "rouge",
-        "yellow": "jaune",
+        "green": "feu vert",
+        "red": "feu rouge",
+        "yellow": "feu jaune",
         "school-zone": "zone scolaire",
         "pedestrian-crossing": "passage piéton",
         "construction-sign": "panneau de chantier"
     },
     'zh-CN': {
-        "green": "绿色",
-        "red": "红色",
-        "yellow": "黄色",
+        "green": "绿灯",
+        "red": "红灯",
+        "yellow": "黄灯",
         "school-zone": "学校区域",
         "pedestrian-crossing": "人行横道",
         "construction-sign": "施工标志"
     },
     'pa': {
-        "green": "ਹਰਾ",
-        "red": "ਲਾਲ",
-        "yellow": "ਪੀਲਾ",
+        "green": "ਹਰੀ ਬੱਤੀ",
+        "red": "ਲਾਲ ਬੱਤੀ",
+        "yellow": "ਪੀਲੀ ਬੱਤੀ",
         "school-zone": "ਸਕੂਲ ਜ਼ੋਨ",
         "pedestrian-crossing": "ਪੈਦਲ ਚਲਣ ਵਾਲਿਆਂ ਦੀ ਪਾਰਿੰਗ",
         "construction-sign": "ਨਿਰਮਾਣ ਚਿੰਨ੍ਹ"
     },
     'la': {
-        "green": "viridis",
-        "red": "ruber",
-        "yellow": "flavus",
+        "green": "lux viridis",
+        "red": "lux rubra",
+        "yellow": "lux flava",
         "school-zone": "regio scholae",
         "pedestrian-crossing": "transitus pedestris",
         "construction-sign": "signum constructionis"
@@ -82,7 +83,7 @@ translations_all = {
 
 def speak(text, lang='en'):
     with tempfile.NamedTemporaryFile(delete=True, suffix='.mp3') as fp:
-        tts = gTTS(text=text, lang=lang)
+        tts = gTTS(text=text, lang=lang if lang != 'la' else 'en')
         tts.save(fp.name)
         playsound.playsound(fp.name)
 
