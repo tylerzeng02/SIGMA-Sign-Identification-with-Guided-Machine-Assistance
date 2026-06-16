@@ -11,9 +11,8 @@ cap = cv2.VideoCapture(0)
 
 last_spoken = {}
 cooldown = 3
-language = 'en'  # Default to English
+language = 'en'   
 
-# Language-specific full phrases
 translations_all = {
     'en': {
         "green": "green light",
